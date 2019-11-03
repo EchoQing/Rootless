@@ -12,6 +12,7 @@
 		C20D7AAF236DCF8900F7E572 /* twoOpt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C20D7AA8236DCF8900F7E572 /* twoOpt.cpp */; };
 		C20D7AB1236DCF8900F7E572 /* threads.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C20D7AAA236DCF8900F7E572 /* threads.cpp */; };
 		C20D7AB2236DCF8900F7E572 /* tsp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C20D7AAB236DCF8900F7E572 /* tsp.cpp */; };
+		C20D7AB9236DDC2B00F7E572 /* rootless.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C20D7AB7236DDC2B00F7E572 /* rootless.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -32,7 +33,6 @@
 		C20D7AA2236DCF8900F7E572 /* MyThread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MyThread.cpp; sourceTree = "<group>"; };
 		C20D7AA3236DCF8900F7E572 /* input */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input; sourceTree = "<group>"; };
 		C20D7AA4236DCF8900F7E572 /* MyThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyThread.h; sourceTree = "<group>"; };
-		C20D7AA5236DCF8900F7E572 /* input.tour */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input.tour; sourceTree = "<group>"; };
 		C20D7AA6236DCF8900F7E572 /* threads.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = threads.h; sourceTree = "<group>"; };
 		C20D7AA7236DCF8900F7E572 /* tsp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tsp.h; sourceTree = "<group>"; };
 		C20D7AA8236DCF8900F7E572 /* twoOpt.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = twoOpt.cpp; sourceTree = "<group>"; };
@@ -40,6 +40,10 @@
 		C20D7AAB236DCF8900F7E572 /* tsp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tsp.cpp; sourceTree = "<group>"; };
 		C20D7AAC236DCF8900F7E572 /* usage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = usage.h; sourceTree = "<group>"; };
 		C20D7AAD236DCF8900F7E572 /* twoOpt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = twoOpt.h; sourceTree = "<group>"; };
+		C20D7AB5236DD19900F7E572 /* input.tour */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input.tour; sourceTree = "<group>"; };
+		C20D7AB6236DD57300F7E572 /* defines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = defines.h; sourceTree = "<group>"; };
+		C20D7AB7236DDC2B00F7E572 /* rootless.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = rootless.cpp; sourceTree = "<group>"; };
+		C20D7AB8236DDC2B00F7E572 /* rootless.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = rootless.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,10 +76,13 @@
 		C20D7A99236DCF5900F7E572 /* Rootless */ = {
 			isa = PBXGroup;
 			children = (
-				C20D7AB4236DD00100F7E572 /* output */,
 				C20D7AB3236DCFF000F7E572 /* input */,
 				C20D7AA1236DCF8900F7E572 /* christofides */,
 				C20D7A9A236DCF5900F7E572 /* main.cpp */,
+				C20D7AAC236DCF8900F7E572 /* usage.h */,
+				C20D7AB6236DD57300F7E572 /* defines.h */,
+				C20D7AB7236DDC2B00F7E572 /* rootless.cpp */,
+				C20D7AB8236DDC2B00F7E572 /* rootless.hpp */,
 			);
 			path = Rootless;
 			sourceTree = "<group>";
@@ -85,13 +92,11 @@
 			children = (
 				C20D7AA2236DCF8900F7E572 /* MyThread.cpp */,
 				C20D7AA4236DCF8900F7E572 /* MyThread.h */,
-				C20D7AA5236DCF8900F7E572 /* input.tour */,
+				C20D7AAA236DCF8900F7E572 /* threads.cpp */,
 				C20D7AA6236DCF8900F7E572 /* threads.h */,
+				C20D7AAB236DCF8900F7E572 /* tsp.cpp */,
 				C20D7AA7236DCF8900F7E572 /* tsp.h */,
 				C20D7AA8236DCF8900F7E572 /* twoOpt.cpp */,
-				C20D7AAA236DCF8900F7E572 /* threads.cpp */,
-				C20D7AAB236DCF8900F7E572 /* tsp.cpp */,
-				C20D7AAC236DCF8900F7E572 /* usage.h */,
 				C20D7AAD236DCF8900F7E572 /* twoOpt.h */,
 			);
 			path = christofides;
@@ -101,15 +106,9 @@
 			isa = PBXGroup;
 			children = (
 				C20D7AA3236DCF8900F7E572 /* input */,
+				C20D7AB5236DD19900F7E572 /* input.tour */,
 			);
 			path = input;
-			sourceTree = "<group>";
-		};
-		C20D7AB4236DD00100F7E572 /* output */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = output;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -171,6 +170,7 @@
 			files = (
 				C20D7A9B236DCF5900F7E572 /* main.cpp in Sources */,
 				C20D7AAF236DCF8900F7E572 /* twoOpt.cpp in Sources */,
+				C20D7AB9236DDC2B00F7E572 /* rootless.cpp in Sources */,
 				C20D7AB2236DCF8900F7E572 /* tsp.cpp in Sources */,
 				C20D7AB1236DCF8900F7E572 /* threads.cpp in Sources */,
 				C20D7AAE236DCF8900F7E572 /* MyThread.cpp in Sources */,

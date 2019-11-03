@@ -12,6 +12,8 @@
 #include "usage.h"
 #include "twoOpt.h"
 #include "MyThread.h"        // thread wrapper class
+#include "defines.h"
+
 // The length was annoying me.
 #define CPS CLOCKS_PER_SEC
 
@@ -32,17 +34,23 @@ int main(int argc, char** argv) {
     f = o = argv[1];
     o.append(".tour");
     
-    
-    ofstream outputStream;
-    outputStream.open(f.c_str(), ios::out);
-    for (int i = 0; i < 500; ++i) {
+    vector<TSP::City>cities;
+//    ofstream outputStream;
+//    outputStream.open(f.c_str(), ios::out);
+    for (int i = 0; i < NODE_NUMBER; ++i) {
         //for (vector<int>::iterator it = circuit.begin(); it != circuit.end()-1; ++it) {
-        outputStream << i << ' ' << rand() % 1000 << ' ' << rand() % 1000 << endl;
+        int x = rand() % GRAPH_RANGE;
+        int y = rand() % GRAPH_RANGE;
+        int hover_time = rand() % (MAX_HOVER_TIME - MIN_HOVER_TIME - 1) + MIN_HOVER_TIME;
+        struct TSP::City c = {x,y,hover_time};
+        cities.push_back(c);
+//        outputStream << i << ' ' << x << ' ' << y << ' ' << hover_time << endl;
     }
     //outputStream << *(circuit.end()-1);
-    outputStream.close();
+//    outputStream.close();
     // Create new tsp object
-    TSP tsp(f, o);
+//    TSP tsp(f, o);
+    TSP tsp(cities);
     int n = tsp.get_size();
     
     // Start timing
@@ -52,7 +60,7 @@ int main(int argc, char** argv) {
     // Read cities from file
     if (DEBUG)
         cout << "Reading cities" << endl;
-    tsp.readCities();
+//    tsp.readCities();
     if (DEBUG)
         cout << "Time to read cities: "
         << ((float) (clock() - t)) / CPS << " s\n";

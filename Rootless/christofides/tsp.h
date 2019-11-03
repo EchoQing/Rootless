@@ -44,14 +44,7 @@ using namespace std;
 class TSP
 {
 private:
-
-	// x and y coords of a node
-	struct City
-	{
-		int x;
-		int y;
-	};
-
+    
 	// Filename supplied on command line to read from
 	string inFname;
 
@@ -74,12 +67,23 @@ private:
 
 	// Prim helper function
 	int minKey(int key[], bool mstSet[]);
+    
+    void commonInit();
 
 
 protected:
 
 
 public:
+    
+    // x and y coords of a node
+    struct City
+    {
+        int x;
+        int y;
+        int hover;
+    };
+
 	// Number of nodes
 	int n;
 
@@ -112,6 +116,9 @@ public:
 
 	// Constructor
 	TSP(string in, string out);
+    
+    // Constructro by cities;
+    TSP(vector<City> cities);
 
 	// Destructor
 	~TSP();

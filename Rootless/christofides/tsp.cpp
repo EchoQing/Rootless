@@ -14,27 +14,21 @@ TSP::TSP(string in, string out){
 
 	// set n to number of lines read from input file
 	getNodeCount();
-
-	// Allocate memory
-	graph = new int*[n];
-	for (int i = 0; i < n; i++) {
-		graph[i] = new int[n];
-		for (int j = 0; j < n; j++) graph[i][j] = 0;
-	}
-
-	cost = new int*[n];
-	for (int i = 0; i < n; i++) {
-		cost[i] = new int[n];
-	}
-
-	path_vals = new int*[n];
-	for (int i = 0; i < n; i++) {
-		path_vals[i] = new int[n];
-	}
-
-	// Adjacency lsit
-	adjlist = new vector<int> [n];
+    
+    // Allocate memory
+    commonInit();
 };
+
+TSP::TSP(vector<City> mcities) {
+    /////////////////////////////////////////////////////
+    // Constructor by cities
+    /////////////////////////////////////////////////////
+    cities = mcities;
+    n = (int)cities.size();
+    
+    // Allocate memory
+    commonInit();
+}
 
 TSP::~TSP(){
 	/////////////////////////////////////////////////////
@@ -50,6 +44,28 @@ TSP::~TSP(){
 	delete [] graph;
 	delete [] cost;
 	delete [] adjlist;
+}
+
+void TSP::commonInit() {
+    // Allocate memory
+    graph = new int*[n];
+    for (int i = 0; i < n; i++) {
+        graph[i] = new int[n];
+        for (int j = 0; j < n; j++) graph[i][j] = 0;
+    }
+
+    cost = new int*[n];
+    for (int i = 0; i < n; i++) {
+        cost[i] = new int[n];
+    }
+
+    path_vals = new int*[n];
+    for (int i = 0; i < n; i++) {
+        path_vals[i] = new int[n];
+    }
+
+    // Adjacency lsit
+    adjlist = new vector<int> [n];
 }
 
 void TSP::getNodeCount(){
@@ -76,12 +92,12 @@ void TSP::readCities(){
 	  cerr << "Can't open input file " << inFname << endl;
 	  exit(1);
 	}
-	int c, x, y;
+	int c, x, y, hover;
 	int i = 0;
 	while (!inStream.eof() ) {
-		inStream >> c >> x >> y;
+		inStream >> c >> x >> y >> hover;
 		// Push back new city to vector
-		struct City c = {x, y};
+		struct City c = {x, y, hover};
 		cities.push_back(c);
 		i++;
 	}
