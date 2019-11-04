@@ -27,8 +27,6 @@
 
 using namespace std;
 
-// Toggle printing debugging info to console
-#define DEBUG 1
 
 // Number of threads to use to fill N x N cost matrix
 #define THREADS 1
@@ -153,6 +151,8 @@ public:
 	// Calls twoOpt function
 	void make_shorter();
 
+    // 解决问题
+    void solution();
 
 	// Debugging functions
 	void printCities();

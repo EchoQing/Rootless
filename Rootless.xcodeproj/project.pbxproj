@@ -44,6 +44,7 @@
 		C20D7AB6236DD57300F7E572 /* defines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = defines.h; sourceTree = "<group>"; };
 		C20D7AB7236DDC2B00F7E572 /* rootless.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = rootless.cpp; sourceTree = "<group>"; };
 		C20D7AB8236DDC2B00F7E572 /* rootless.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = rootless.hpp; sourceTree = "<group>"; };
+		C20D80A0237084A900F7E572 /* Clock.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Clock.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +84,7 @@
 				C20D7AB6236DD57300F7E572 /* defines.h */,
 				C20D7AB7236DDC2B00F7E572 /* rootless.cpp */,
 				C20D7AB8236DDC2B00F7E572 /* rootless.hpp */,
+				C20D80A0237084A900F7E572 /* Clock.hpp */,
 			);
 			path = Rootless;
 			sourceTree = "<group>";
@@ -293,6 +295,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;

@@ -14,9 +14,10 @@ void MyThread::run()
 	mytsp->path_vals[my_id][0] = start_node;
 	mytsp->path_vals[my_id][1] = result;
 
-	if (DEBUG)
+#if __DEBUG__
         cout << "thread " << setw(4) << left << my_id << setw(8) << left
 			<< " result: " << setw(5) << left << result << endl;
+#endif
 
 	pthread_exit(NULL);
 }

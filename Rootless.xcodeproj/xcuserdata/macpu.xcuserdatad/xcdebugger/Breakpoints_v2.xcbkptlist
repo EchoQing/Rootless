@@ -7,16 +7,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "5348289D-FFE7-4FB7-BBC7-52B67A6A0655"
+            uuid = "8BF7CF42-A84D-420F-A7E4-4151ACAA394E"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Rootless/christofides/tsp.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "269"
-            endingLineNumber = "269"
-            landmarkName = "TSP::minKey(key, mstSet)"
+            startingLineNumber = "558"
+            endingLineNumber = "558"
+            landmarkName = "TSP::solution()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
