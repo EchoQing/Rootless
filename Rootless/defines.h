@@ -16,7 +16,7 @@
 #define __V__ 10
 
 // 节点的个数
-#define NODE_NUMBER 500
+#define NODE_NUMBER 30
 
 // 最大和最小的停留时间。
 #define MAX_HOVER_TIME 10
@@ -30,6 +30,9 @@
 
 // 
 #define CPS CLOCKS_PER_SEC
+
+// K 值
+#define __K__ 3
 
 #define DebugLog(...) \
 if (__DEBUG__) {\

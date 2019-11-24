@@ -13,6 +13,7 @@
 		C20D7AB1236DCF8900F7E572 /* threads.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C20D7AAA236DCF8900F7E572 /* threads.cpp */; };
 		C20D7AB2236DCF8900F7E572 /* tsp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C20D7AAB236DCF8900F7E572 /* tsp.cpp */; };
 		C20D7AB9236DDC2B00F7E572 /* rootless.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C20D7AB7236DDC2B00F7E572 /* rootless.cpp */; };
+		C22C014E23899AD000C83B3B /* Stirling.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C22C014C23899AD000C83B3B /* Stirling.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -45,6 +46,8 @@
 		C20D7AB7236DDC2B00F7E572 /* rootless.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = rootless.cpp; sourceTree = "<group>"; };
 		C20D7AB8236DDC2B00F7E572 /* rootless.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = rootless.hpp; sourceTree = "<group>"; };
 		C20D80A0237084A900F7E572 /* Clock.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Clock.hpp; sourceTree = "<group>"; };
+		C22C014C23899AD000C83B3B /* Stirling.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Stirling.cpp; sourceTree = "<group>"; };
+		C22C014D23899AD000C83B3B /* Stirling.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Stirling.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +88,8 @@
 				C20D7AB7236DDC2B00F7E572 /* rootless.cpp */,
 				C20D7AB8236DDC2B00F7E572 /* rootless.hpp */,
 				C20D80A0237084A900F7E572 /* Clock.hpp */,
+				C22C014C23899AD000C83B3B /* Stirling.cpp */,
+				C22C014D23899AD000C83B3B /* Stirling.hpp */,
 			);
 			path = Rootless;
 			sourceTree = "<group>";
@@ -171,6 +176,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C20D7A9B236DCF5900F7E572 /* main.cpp in Sources */,
+				C22C014E23899AD000C83B3B /* Stirling.cpp in Sources */,
 				C20D7AAF236DCF8900F7E572 /* twoOpt.cpp in Sources */,
 				C20D7AB9236DDC2B00F7E572 /* rootless.cpp in Sources */,
 				C20D7AB2236DCF8900F7E572 /* tsp.cpp in Sources */,

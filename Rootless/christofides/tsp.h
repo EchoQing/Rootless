@@ -77,6 +77,7 @@ public:
     // x and y coords of a node
     struct City
     {
+        int index;
         int x;
         int y;
         int hover;
@@ -160,7 +161,7 @@ public:
 	void printResult();
 	void printEuler();
 	void printPath();
-
+    
 	// Get node count
 	int get_size() {return n;};
 };

@@ -95,12 +95,12 @@ void TSP::readCities(){
 	  cerr << "Can't open input file " << inFname << endl;
 	  exit(1);
 	}
-	int c, x, y, hover;
+	int index, x, y, hover;
 	int i = 0;
 	while (!inStream.eof() ) {
-		inStream >> c >> x >> y >> hover;
+		inStream >> index >> x >> y >> hover;
 		// Push back new city to vector
-		struct City c = {x, y, hover};
+		struct City c = {index, x, y, hover};
 		cities.push_back(c);
 		i++;
 	}
@@ -113,7 +113,10 @@ int TSP::get_distance(struct TSP::City c1, struct TSP::City c2) {
 	/////////////////////////////////////////////////////
 	int dx = pow((float)(c1.x - c2.x), 2);
 	int dy = pow((float)(c1.y - c2.y), 2);
-	return (floor((float) (sqrt(dx + dy)) + 0.5));
+    
+    return (floor((float) (sqrt(dx + dy)) + 0.5));
+    // 算上两个点的停留时间的权重。
+//    return (floor((float) (sqrt(dx + dy)) + 0.5 + (c1.hover + c2.hover) / 2));
 };
 
 void *F(void* args){
@@ -518,7 +521,7 @@ void TSP::solution() {
     MyThread threads[NUM_THREADS];
     
     int best = INT_MAX;
-    int bestIndex;
+    int bestIndex = 0;
     int stop_here = NUM_THREADS;
     
     // Amount to increment starting node by each time
@@ -597,13 +600,11 @@ void TSP::solution() {
     
 #if DEBUG
     // Print to file
-//    printResult();
-//    printPath();
+    printResult();
+    printPath();
 //    printEuler();
     
 #endif
     
     DebugLog("\nTotal time: %f s", Clock() - start);
-    
 }
-
