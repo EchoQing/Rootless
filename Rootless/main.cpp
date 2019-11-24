@@ -14,11 +14,12 @@
 #include "MyThread.h"        // thread wrapper class
 #include "defines.h"
 #include "Clock.hpp"
+#include "permutation_combination.h"
 
 vector<vector<TSP::City>> connected_graph(TSP *tsp, int B);
 void find_connected_dfs(int **graph, int *connected, int index, int n, int id);
 
-int main1(int argc, char** argv) {
+int main(int argc, char** argv) {
     // Check that user entered filename on command line
     if (argc < 2)
     {
@@ -62,9 +63,13 @@ int main1(int argc, char** argv) {
             Bu = B;
             continue;
         }
-        else if (p > 2 * __K__) {
+        else if (p > 2 * __K__) { // 猜测值可能太小了。
             Bl = B;
             continue;
+        } else {
+            vector<vector<vector<int>>> permutation = get_permutation_combination(p);
+            
+            cout << permutation.size();
         }
     }
     return 0;
@@ -160,7 +165,7 @@ void find_connected_dfs(int **graph, int *connected, int index, int n, int id)
     }
 }
 
-void testTsp(TSP tsp)
+void test_tsp(TSP tsp)
 {
     
     int Bl = 0;
@@ -225,99 +230,8 @@ void testTsp(TSP tsp)
     
 }
 
-void print_reslut(vector<vector<int>> reslut, size_t box)
-{
-    cout << "[ ";
-    for (int i = 0; i < box; i++) {
-        if (i < reslut.size()) {
-            vector<int> res = reslut.at(i);
-            cout << "{ ";
-            for (vector<int>::iterator it = res.begin(); it != res.end(); ++it) {
-                cout << *it << ", ";
-            }
-            cout << "} ";
-        } else {
-            cout << "-- ";
-        }
-        cout << ", ";
-    }
-    cout << "] " << endl;
-}
 
-void print_c(vector<int> select)
-{
-    cout<< "[ ";
-    for(vector<int>::iterator it=select.begin(); it != select.end(); it++) {
-        cout << *it << ' ';
-    }
-    cout<< "] "<< endl;
-}
-/// 组合
-/// @param data 源数据
-/// @param step 步骤
-/// @param select_data 中间值
-/// @param target_num 取多少个
-/// @param result 答案
-void combination(vector<int> data, int step, vector<int> select_data, int target_num, vector<vector<int>> *result)
-{
-    if (select_data.size() == target_num) {
-        result->push_back(select_data);
-        return;
-    }
-    if (step >= data.size()) {
-        return;
-    }
-    select_data.push_back(data.at(step));
-    combination(data, step + 1, select_data, target_num, result);
-    select_data.pop_back();
-    combination(data, step + 1, select_data, target_num, result);
-}
-
-
-
-/// 排列
-/// @param arr 数组
-/// @param box 盒子的个数。
-/// @param selected 中间状态
-/// @param result 最终的答案。
-void permutation(vector<int> arr, int box, vector<vector<int>> selected, vector<vector<vector<int>>> *result)
-{
-    int count = (int)arr.size();
-    if (box == 1) {
-        selected.push_back(arr);
-        result->push_back(selected);
-//        print_reslut(reslut, 4);
-        return;
-    } else if (box == count) {
-        for (vector<int>::iterator it = arr.begin(); it != arr.end(); ++it) {
-            vector<int> res;
-            res.push_back(*it);
-            selected.push_back(res);
-        }
-        result->push_back(selected);
-//        print_reslut(reslut, 4);
-        return;
-    } else {
-        for(int i = 1; i <= count / box; i++) {
-            vector<vector<int>> combination_res;
-            vector<int> selected_combination;
-            combination(arr, 0, selected_combination, i, &combination_res);
-            for(vector<vector<int>>::iterator it=combination_res.begin(); it != combination_res.end(); it++) {
-                vector<int> data = vector<int>(arr);
-                vector<int> combin = *it;
-                vector<vector<int>> select_copy = vector<vector<int>>(selected);
-                select_copy.push_back(combin);
-                for (vector<int>::iterator iit=combin.begin(); iit != combin.end(); iit++) {
-                    data.erase(find(data.begin(), data.end(), *iit));
-                }
-                permutation(data, box - 1, select_copy, result);
-                
-            }
-        }
-    }
-}
-
-int main()
+int test_permutation_combination()
 {
     int n = 4;
     vector<int> arr;
@@ -328,18 +242,14 @@ int main()
     vector<int> select;
     vector<vector<vector<int>>> aa;
     
-//    for(vector<vector<int>>::iterator it=result.begin();it != result.end(); it++) {
-//        print_c(*it);
-//    }
-    
     for (int i = 1 ; i <= n; i++) {
-//        cout << "有" << i << "个盒子\n----------------" <<endl;
+        cout << "有" << i << "个盒子\n----------------" <<endl;
         vector<vector<int>> result;
         permutation(arr, i, result, &aa);
     }
     
     for (vector<vector<vector<int>>>::iterator it=aa.begin(); it != aa.end(); it++) {
-        print_reslut(*it, n);
+//        print_reslut(*it, n);
     }
     
     return 0;
