@@ -37,7 +37,11 @@ using namespace std;
 // Calculate highest index controlled by thread id
 #define END_AT(id,p,n) (START_AT((id)+1,p,n)-1)
 
-
+typedef enum : int {
+    TSP_File = 0,
+    TSP_City = 1,
+    TSP_Graph = 2,
+} TSP_Type;
 
 class TSP
 {
@@ -56,6 +60,7 @@ private:
 	// Used to find minimum matching on odd nodes
 	int **cost;
 
+    TSP_Type type;
 
 	// Initialization function
 	void getNodeCount();
@@ -83,6 +88,13 @@ public:
         int hover;
     };
 
+    struct Map
+    {
+        vector<City> cities;
+        int **graph;
+        int n;
+    };
+    
 	// Number of nodes
 	int n;
 
@@ -118,6 +130,9 @@ public:
     
     // Constructro by cities;
     TSP(vector<City> cities);
+    
+    // Constructor with cities and graph
+    TSP(vector<City> cities, int **graph);
 
 	// Destructor
 	~TSP();

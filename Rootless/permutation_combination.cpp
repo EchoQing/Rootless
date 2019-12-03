@@ -59,13 +59,13 @@ void combination(vector<int> data, int step, vector<int> select_data, int target
     combination(data, step + 1, select_data, target_num, result);
 }
 
-void permutation(vector<int> arr, int box, vector<vector<int>> selected, vector<vector<vector<int>>> *result)
+void permutation(vector<int> arr, int box, vector<vector<int>> selected, vector<vector<vector<int>>> *result, int n)
 {
     int count = (int)arr.size();
     if (box == 1) {
         selected.push_back(arr);
         result->push_back(selected);
-        print_reslut(selected, 4);
+        print_reslut(selected, n);
         return;
     } else if (box == count) {
         for (vector<int>::iterator it = arr.begin(); it != arr.end(); ++it) {
@@ -74,7 +74,7 @@ void permutation(vector<int> arr, int box, vector<vector<int>> selected, vector<
             selected.push_back(res);
         }
         result->push_back(selected);
-        print_reslut(selected, 4);
+        print_reslut(selected, n);
         return;
     } else {
         for(int i = 1; i <= count / box; i++) {
@@ -97,7 +97,7 @@ void permutation(vector<int> arr, int box, vector<vector<int>> selected, vector<
                 for (vector<int>::iterator iit=combin.begin(); iit != combin.end(); iit++) {
                     data.erase(find(data.begin(), data.end(), *iit));
                 }
-                permutation(data, box - 1, select_copy, result);
+                permutation(data, box - 1, select_copy, result, n);
                 
             }
         }
@@ -116,7 +116,7 @@ vector<vector<vector<int>>> get_permutation_combination(int n)
     
     for (int i = 1 ; i <= n; i++) {
         vector<vector<int>> selected;
-        permutation(data, i, selected, &result);
+        permutation(data, i, selected, &result, n);
     }
     
     return result;

@@ -31,7 +31,7 @@ void combination(vector<int> data, int step, vector<int> select_data, int target
 /// @param box 盒子的个数。
 /// @param selected 中间状态
 /// @param result 最终的答案。
-void permutation(vector<int> arr, int box, vector<vector<int>> selected, vector<vector<vector<int>>> *result);
+void permutation(vector<int> arr, int box, vector<vector<int>> selected, vector<vector<vector<int>>> *result, int n);
 
 /// 获取排列组合
 /// @param n 有多少个数。

@@ -20,6 +20,8 @@ TSP::TSP(string in, string out){
     
     // Allocate memory
     commonInit();
+    
+    type = TSP_File;
 };
 
 TSP::TSP(vector<City> mcities) {
@@ -31,6 +33,29 @@ TSP::TSP(vector<City> mcities) {
     
     // Allocate memory
     commonInit();
+    type = TSP_City;
+}
+
+TSP::TSP(vector<City> mcities, int **mgraph) {
+    cities = mcities;
+    n = (int)cities.size();
+    graph = mgraph;
+    type = TSP_Graph;
+    
+    // Allocate memory
+    
+    cost = new int*[n];
+    for (int i = 0; i < n; i++) {
+        cost[i] = new int[n];
+    }
+
+    path_vals = new int*[n];
+    for (int i = 0; i < n; i++) {
+        path_vals[i] = new int[n];
+    }
+
+    // Adjacency lsit
+    adjlist = new vector<int> [n];
 }
 
 TSP::~TSP(){
@@ -98,11 +123,13 @@ void TSP::readCities(){
 	int index, x, y, hover;
 	int i = 0;
 	while (!inStream.eof() ) {
-		inStream >> index >> x >> y >> hover;
-		// Push back new city to vector
-		struct City c = {index, x, y, hover};
-		cities.push_back(c);
-		i++;
+        inStream >> index >> x >> y >> hover;
+        if (i < n ) {
+            // Push back new city to vector
+            struct City c = {index, x, y, hover};
+            cities.push_back(c);
+            i++;
+        }
 	}
 	inStream.close();
 };
@@ -138,7 +165,7 @@ void *F(void* args){
 	for (int i = start; i <= end; i++) {
 		for (int j = i; j < tsp->n; j++) {
 			// Don't delete this line  it's supposed to be there.
-			graph[i][j] = graph[j][i] =  tsp->get_distance(tsp->cities[i], tsp->cities[j]);
+			graph[i][j] = graph[j][i] =  tsp->get_distance(tsp->cities[i], tsp->cities[j]) + (tsp->cities[i].hover + tsp->cities[j].hover) * __V__ / 2.0;
 		}
 	}
 	//t = clock() - t;
@@ -375,6 +402,11 @@ void TSP::euler (int pos, vector<int> &path) {
 
 void TSP::make_hamilton(vector<int> &path, int &path_dist) {
 	// remove visited nodes from Euler tour
+    if (path.size() == 1) {
+        path_dist = 0;
+        return;
+    }
+    
 	bool visited[n]; // boolean value for each node if it has been visited yet
 	memset(visited, 0, n * sizeof(bool));
 
@@ -420,15 +452,15 @@ int TSP::find_best_path (int pos) {
 	euler(pos, path);
 
 	// make it hamiltonian, pass copy of vars
-	int length;
+	int length = 0;
 	make_hamilton(path, length);
 
 	// Optimize
-	twoOpt(graph, path, length, n);
-	twoOpt(graph, path, length, n);
-	twoOpt(graph, path, length, n);
-	twoOpt(graph, path, length, n);
-	twoOpt(graph, path, length, n);
+//	twoOpt(graph, path, length, n);
+//	twoOpt(graph, path, length, n);
+//	twoOpt(graph, path, length, n);
+//	twoOpt(graph, path, length, n);
+//	twoOpt(graph, path, length, n);
 
 	return length;
 }
@@ -493,16 +525,20 @@ void TSP::solution() {
     Clock temp;
     
     // Read cities from file
-    DebugLog("Reading cities");
-    readCities();
-    DebugLog("Time to read cities: %f", Clock() - temp);
-    cout << "number of cities: " << n << endl;
+    if (type < TSP_City) {
+        DebugLog("Reading cities");
+        readCities();
+        DebugLog("Time to read cities: %f", Clock() - temp);
+    }
+//    cout << "number of cities: " << n << endl;
     
     // Fill N x N matrix with distances between nodes
-    DebugLog("\nFilling matrix")
-    temp = Clock();
-    fillMatrix_threads();
-    DebugLog("Time to fill matrix: %f", Clock() - temp);
+    if (type < TSP_Graph) {
+        DebugLog("\nFilling matrix")
+        temp = Clock();
+        fillMatrix_threads();
+        DebugLog("Time to fill matrix: %f", Clock() - temp);
+    }
     
     // Find a MST T in graph G
     DebugLog("\nFinding mst");
@@ -575,7 +611,6 @@ void TSP::solution() {
         remaining -= (stop_here * increment);
     }
     
-    cout << "count: " << count << endl;
     // Loop through each index used and find shortest path
     for (long t = 0; t < count; t++) {
         if (path_vals[t][1] < best) {
@@ -584,23 +619,26 @@ void TSP::solution() {
         }
     }
     
-    cout << "\nbest: " << best << " @ index " << bestIndex << endl;
-    cout << "time: " << Clock() - temp << " s\n";
+    if (best< 0) {
+        cout <<endl;
+    }
+//    cout << "\nbest: " << best << " @ index " << bestIndex << endl;
+//    cout << "time: " << Clock() - temp << " s\n";
     
     // Store best path
     create_tour(bestIndex);
-    make_shorter();
-    make_shorter();
-    make_shorter();
-    make_shorter();
-    make_shorter();
+//    make_shorter();
+//    make_shorter();
+//    make_shorter();
+//    make_shorter();
+//    make_shorter();
     
     
-    cout << "\nFinal length: " << pathLength << endl;
+//    cout << "\nFinal length: " << pathLength << endl;
     
 #if DEBUG
     // Print to file
-    printResult();
+//    printResult();
     printPath();
 //    printEuler();
     
