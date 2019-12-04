@@ -486,14 +486,16 @@ void TSP::printResult(){
 };
 
 void TSP::printPath(){
-	cout << endl;
 	for (vector<int>::iterator it = circuit.begin(); it != circuit.end()-1; ++it) {
-		cout << *it << " to " << *(it+1) << " ";
-		cout << graph[*it][*(it+1)] << endl;
+        City city_m = cities.at(*it);
+        City city_n = cities.at(*(it+1));
+        LOG(LOG_TSP, "%d to %d : %d", city_m.index, city_n.index, graph[*it][*(it+1)] );
 	}
-	cout << *(circuit.end()-1) << " to " << circuit.front();
 
-	cout << "\nLength: " << pathLength << endl << endl;
+    City city_m = cities.at(*(circuit.end()-1));
+    City city_n = cities.at(circuit.front());
+    LOG(LOG_TSP, "%d to %d : %d",  city_m.index, city_n.index, graph[*(circuit.end()-1)][circuit.front()] );
+    LOG(LOG_TSP, "总路径长: %d\n", pathLength);
 };
 
 void TSP::printEuler() {

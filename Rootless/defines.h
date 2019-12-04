@@ -11,14 +11,17 @@
 
 // Toggle printing debugging info to console
 #define __DEBUG__ 0
+#define LOG_TSP 1
+#define LOG_CUT 1
+#define LOG_MERGE 0
 
 // 默认速度
 #define __V__ 10
 
 // 节点的个数
-#define NODE_NUMBER 5
+#define NODE_NUMBER 30
 // K 值
-#define __K__ 3
+#define __K__ 4
 
 //
 #define LOOP_TIME 1
@@ -43,5 +46,10 @@ if (__DEBUG__) {\
     printf("\n"); \
 }
 
+#define LOG(tag, ...) \
+if (tag) { \
+    printf(__VA_ARGS__); \
+    printf("\n"); \
+}
 
 #endif /* defines_h */
