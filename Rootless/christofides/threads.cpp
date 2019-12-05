@@ -12,7 +12,6 @@ void Thread::start() {
 }
 
 
-
 void Thread::join() {
 	///////////////////////////////////////////////////
 	// Allow thread to wait for the termination status

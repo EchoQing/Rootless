@@ -19,16 +19,16 @@
 #define __V__ 10
 
 // 节点的个数
-#define NODE_NUMBER 30
+#define NODE_NUMBER 10
 // K 值
-#define __K__ 4
+#define __K__ 2
 
 //
 #define LOOP_TIME 1
 
 // 最大和最小的停留时间。
-#define MAX_HOVER_TIME 180
-#define MIN_HOVER_TIME 1
+#define MAX_HOVER_TIME 0
+#define MIN_HOVER_TIME 0
 
 // 生成的图范围
 #define GRAPH_RANGE 1000

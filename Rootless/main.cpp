@@ -33,7 +33,7 @@ int algorithm(TSP *tsp)
         vector<vector<TSP::City>> graph_lite = connected_graph(tsp, B / 3.0);
         int p = (int)graph_lite.size();
         LOG(LOG_CUT, "当B = %d, 图的个数: %d",B ,p);
-        LOG(LOG_CUT, "------------------------\n");
+        LOG(LOG_CUT, "---对照算法---------------------\n");
         if (p > 2 * __K__) {
             // 猜测值可能太小了。
             Bl = B;
@@ -205,7 +205,7 @@ int algorithm5(TSP *tsp)
 //        vector<vector<TSP::City>> graph_lite = connected_graph(tsp, B / 3.0);
         int p = (int)maps.size();
         LOG(LOG_CUT, "当B = %d, 图的个数: %d",B ,p);
-        LOG(LOG_CUT, "------------------------\n");
+        LOG(LOG_CUT, "--修改过后Rootless算法----------------------\n");
         if (p > 2 * __K__) {
             // 猜测值可能太小了。
             Bl = B;
@@ -264,7 +264,7 @@ int algorithm1(TSP *tsp)
         vector<vector<TSP::City>> graph_lite = connected_graph(tsp, B / 2.0);
         int p = (int)graph_lite.size();
         LOG(LOG_CUT, "当B = %d, 图的个数: %d",B ,p);
-        LOG(LOG_CUT, "------------------------\n");
+        LOG(LOG_CUT, "--对照算法----------------------\n");
         if (p > 2 * __K__) {
             // 猜测值可能太小了。
             Bl = B;
@@ -291,43 +291,46 @@ int algorithm1(TSP *tsp)
     return Bu;
 }
 
-int algorithm2(TSP *tsp)
-{
-   
-    int Bl = 0;
-    int Bu = tsp->pathLength;
-    while (Bl + 1 < Bu) {
-        int B =  (Bl + Bu) / 2;
-        vector<vector<TSP::City>> graph_lite = connected_graph(tsp, B / 3.0);
-        int p = (int)graph_lite.size();
-        LOG(LOG_CUT, "当B = %d, 图的个数: %d",B ,p);
-        LOG(LOG_CUT, "------------------------\n");
-        if (p > 2 * __K__) {
-            // 猜测值可能太小了。
-            Bl = B;
-            continue;
-        } else {
-            int route_count = 0;
-            for (vector<vector<TSP::City>>::iterator it=graph_lite.begin(); it != graph_lite.end(); it++) {
-                TSP _tsp(*it);
-                _tsp.solution();
-                vector<vector<int>> connect_complete = cutting_tsp(&_tsp, 13.0 / 6.0 * B);
-                route_count += connect_complete.size();
-                if (route_count > __K__) {
-                    break;
-                }
-            }
-            if (route_count <= __K__) {
-                Bu = B;
-            } else {
-                Bl = B;
-            }
 
-        }
-    }
-    
-    return Bu;
-}
+// Echo
+
+//int algorithm2(TSP *tsp)
+//{
+//
+//    int Bl = 0;
+//    int Bu = tsp->pathLength;
+//    while (Bl + 1 < Bu) {
+//        int B =  (Bl + Bu) / 2;
+//        vector<vector<TSP::City>> graph_lite = connected_graph(tsp, B / 3.0);
+//        int p = (int)graph_lite.size();
+//        LOG(LOG_CUT, "当B = %d, 图的个数: %d",B ,p);
+//        LOG(LOG_CUT, "---第三个算法----------************---------------------\n");
+//        if (p > 2 * __K__) {
+//            // 猜测值可能太小了。
+//            Bl = B;
+//            continue;
+//        } else {
+//            int route_count = 0;
+//            for (vector<vector<TSP::City>>::iterator it=graph_lite.begin(); it != graph_lite.end(); it++) {
+//                TSP _tsp(*it);
+//                _tsp.solution();
+//                vector<vector<int>> connect_complete = cutting_tsp(&_tsp, 13.0 / 6.0 * B);
+//                route_count += connect_complete.size();
+//                if (route_count > __K__) {
+//                    break;
+//                }
+//            }
+//            if (route_count <= __K__) {
+//                Bu = B;
+//            } else {
+//                Bl = B;
+//            }
+//
+//        }
+//    }
+//
+//    return Bu;
+//}
 
 int algorithm3(TSP *tsp)
 {
@@ -338,7 +341,7 @@ int algorithm3(TSP *tsp)
         vector<TSP::Map> maps = connected_map(tsp, B / 2.0);
         int p = (int)maps.size();
         LOG(LOG_CUT, "当B = %d, 图的个数: %d",B ,p);
-        LOG(LOG_CUT, "------------------------\n");
+        LOG(LOG_CUT, "-修改后的对比算法 -----------------------\n");
         if (p > 2 * __K__) {
             // 猜测值可能太小了。
             Bl = B;
@@ -375,7 +378,7 @@ int algorithm4(TSP *tsp)
         vector<TSP::Map> maps = connected_map(tsp, B / 3.0);
         int p = (int)maps.size();
         LOG(LOG_CUT, "当B = %d, 图的个数: %d",B ,p);
-        LOG(LOG_CUT, "------------------------\n");
+        LOG(LOG_CUT, "--*修改后的第三个算法********-**************---**************-********-************----------\n");
         if (p > 2 * __K__) {
             // 猜测值可能太小了。
             Bl = B;
@@ -766,8 +769,8 @@ void run_algorithm(int **answer, int n)
     answer[n][0] = algorithm(&tsp);
     cout << "对照算法：" <<endl;
     answer[n][1] = algorithm1(&tsp);
-    cout << "\n第三个算法:" <<endl;
-    answer[n][2] = algorithm2(&tsp);
+//    cout << "\n第三个算法:" <<endl;
+//    answer[n][2] = algorithm2(&tsp);
     cout << "\n修改过后的对比算法：" <<endl;
     answer[n][3] = algorithm3(&tsp);
     cout << "\n修改过后的第三个算法: " <<endl;
@@ -780,7 +783,7 @@ void run_algorithm(int **answer, int n)
     << "修改过后Rootless算法:" << answer[n][5] << endl
     << "对照算法最优值: " << answer[n][1] << endl
     << "修改过后的对比算法：" << answer[n][3] << endl
-    << "第三个算法: " << answer[n][2] << endl
+// Echo   << "第三个算法: " << answer[n][2] << endl
     << "修改过后的第三个算法: " << answer[n][4] << endl
          << endl;
     
@@ -808,10 +811,10 @@ int main(int argc, char** argv) {
     
     cout << "\n平均值：  " << endl;
     cout << "Rootless算法最优值: " << answer[0][0] << endl
-    << "修改过后Rootless算法:" << answer[0][5] << endl
+    << "修改过后Rootless算法:" << answer[0][5] << "  path upper bound:" << answer[0][5] * 13.0/6.0<<  endl
     << "对照算法最优值: " << answer[0][1] << endl
-    << "修改过后的对比算法：" << answer[0][3] << endl
-    << "第三个算法: " << answer[0][2] << endl
+    << "修改过后的对比算法：" << answer[0][3] << "  path upper bound:" << answer[0][3] * 5.0/2.0<< endl
+// Echo   << "第三个算法: " << answer[0][2] << endl
     << "修改过后的第三个算法: " << answer[0][4] << endl
          << endl;
     
